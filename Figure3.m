@@ -1,11 +1,11 @@
-n2=   %n2=2N
+n2=   %pick n2=2N. Warning, it can about 30minutes for 2N=200
 prheatmap=zeros(100,400);
-parfor i=1:100
+for i=1:100
     for j=1:400
         prheatmap(i,j)=minpr(n2,(i-1)/100,(j-1)/100)%gives the matrix for the density plot for min PR/n2
     end
 end
-h=heatmap(prheatmap,'Colormap',flip(hot));
+h=heatmap(prheatmap,'Colormap',flip(hot)); %plots the matrix as a density plot
 grid off
 h.NodeChildren(3).YDir='normal';
 XLabels = 0.01:0.01:1;
@@ -26,33 +26,34 @@ j25=zeros(length(nk),1);
 j5=zeros(length(nk),1);
 j75=zeros(length(nk),1);
 j1=zeros(length(nk),1);
-parfor i=1:length(nk)
+for i=1:length(nk)
     j0(i)=minpr(2*nk(i),1.5,0);
     j25(i)=minpr(2*nk(i),1.5,0.25);
     j5(i)=minpr(2*nk(i),1.5,0.5);
     j75(i)=minpr(2*nk(i),1.5,0.75);
     j1(i)=minpr(2*nk(i),1.5,1);
 end
-hold on 
-plot(nk,j0)
-plot(nk,j0,'g')
-plot(nk,j0,'y')
-plot(nk,j0,'m')
-plot(nk,j0,'r')
+hold on %plots the values of min(PR)/2N vs 2N for different j2/j 
+plot(nk,2*j0)
+plot(nk,2*j25,'g')
+plot(nk,2*j5,'y')
+plot(nk,2*j75,'m')
+plot(nk,2*j1,'r')
 hold off
 legend('j_2/j=0','j_2/j=0.25','j_2/j=0.5','j_2/j=0.75','j_2/j=1')
 xlabel('2N') 
 ylabel('min(PR/2N)')
+set(gca, 'XScale', 'log')
 
 
-n1=   %n1=2N
+n1=   %pick n1=2N. Warning, it can about 30minutes for 2N=200
 mgheatmap=zeros(100,400);
-parfor i=1:100
+for i=1:100
     for j=1:400
         mgheatmap(i,j)=meangap(n1,(i-1)/100,(j-1)/100)%gives the matrix for the density plot for mean gap ratio
     end
 end
-h=heatmap(mgheatmap,'Colormap',flip(hot));
+h=heatmap(mgheatmap,'Colormap',flip(hot));%plots the matrix as a density plot
 grid off
 h.NodeChildren(3).YDir='normal';
 XLabels = 0.01:0.01:1;
